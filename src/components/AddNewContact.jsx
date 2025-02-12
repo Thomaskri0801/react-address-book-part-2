@@ -4,20 +4,21 @@ import { useNavigate } from 'react-router-dom';
 
 
 function AddNewContact() {
+    const generateId = () => Date.now().toString();
     const dataContext = useContext(DataContext)
     const navigate = useNavigate()
     const [user, setUser] = useState({
-        id: dataContext.users.length + 1,
+        id: generateId(),
         firstName: "",
         lastName: "",
         street: "",
         city: ""
     })
 
+
     const handleInputChange = (event) => {
         const name = event.name
         const inputValue = event.value
-
         
         if(name == "firstName") {
             setUser({...user, firstName: inputValue})
@@ -31,21 +32,19 @@ function AddNewContact() {
     }
     
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault()
-
         try {
-            fetch("https://boolean-uk-api-server.fly.dev/thomaskri08/contact", {
+            await fetch("https://boolean-uk-api-server.fly.dev/thomaskri0801/contact", {
                 method:'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
             });
-
-            dataContext.handleNewUser(user)
-            navigate("/")
+            dataContext.setTrigger((prev) => prev + 1);
         } catch (error) {
             console.log(error)
         }
+        navigate("/")
     }
 
 

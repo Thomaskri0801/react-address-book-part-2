@@ -6,21 +6,20 @@ import { Link, Route, Routes } from 'react-router-dom';
 import ContactList from './components/ContactList'
 import AddNewContact from './components/AddNewContact'
 import ContactInfo from './components/ContactInfo'
+import UpdateContact from './components/UpdateContact'
 
 const DataContext = createContext()
 
 function App() {
     const [users, setUsers] = useState([])
+    const [trigger, setTrigger] = useState(0)
 
     useEffect(() => {
-        fetch("https://boolean-uk-api-server.fly.dev/thomaskri08/contact")
+        console.log("entered use")
+        fetch("https://boolean-uk-api-server.fly.dev/thomaskri0801/contact")
             .then(res => res.json())
             .then(data => setUsers(data))
-    }, [])
-
-    const handleNewUser = (newUser) => {
-        setUsers([...users, newUser])
-    }
+    }, [trigger])
 
     console.log(users)
 
@@ -36,10 +35,11 @@ function App() {
                 </nav>
             </header>
             <main>
-                <DataContext.Provider value={ { users, setUsers, handleNewUser } }>
+                <DataContext.Provider value={ { users, setUsers, trigger, setTrigger } }>
                     <Routes>
                         <Route path='/' element={<ContactList/>}/>
                         <Route path='/contact/:id' element={<ContactInfo/>}/>
+                        <Route path='/updatecontact/:id' element={<UpdateContact/>}/>
                         <Route path='/add' element={<AddNewContact/>}/>
                     </Routes>
                 </DataContext.Provider>

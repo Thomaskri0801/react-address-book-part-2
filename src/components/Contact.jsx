@@ -5,8 +5,8 @@ function Contact(user) {
         <tr>
             <td>{user.user.firstName}</td>
             <td>{user.user.lastName}</td> 
-            <td><button><Link to={`/contact/${user.user.id}`}>View</Link></button></td>
-            <td><button><Link to={`/contact/${user.user.id}`}>Delete</Link></button></td>
+            <button><Link to={`/contact/${user.user.id}`}>View</Link></button>
+        
         </tr>
     )
 }

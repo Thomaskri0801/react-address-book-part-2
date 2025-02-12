@@ -10,7 +10,7 @@ function ContactList() {
             <table>
                 <tbody>
                     {context.users.map((user, index) => 
-                        <Contact key={index}  user={user}/>
+                        <Contact key={index}  user={user} handleDeleteUser={context.handleDeleteUser}/>
                     )}
                 </tbody>
             </table>
