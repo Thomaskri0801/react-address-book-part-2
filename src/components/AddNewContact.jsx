@@ -31,19 +31,17 @@ function AddNewContact() {
     }
     
     
-    const handleSubmit = async(event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
 
         try {
-            const response = await fetch("https://boolean-uk-api-server.fly.dev/thomaskri08/contact", {
+            fetch("https://boolean-uk-api-server.fly.dev/thomaskri08/contact", {
                 method:'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
             });
 
             dataContext.handleNewUser(user)
-            
-            console.log(response)
             navigate("/")
         } catch (error) {
             console.log(error)
